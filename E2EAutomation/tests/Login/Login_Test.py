@@ -4,6 +4,7 @@ from playwright.sync_api import Page, expect, sync_playwright
 from E2EAutomation.src.pages.DashboardPage import DashboardPage
 from E2EAutomation.src.pages.LoginPage import LoginPage
 
+
 @pytest.mark.parametrize(
     "user, pw",
     [("danielbh2003@gmail.com", "sarit2608!")])
