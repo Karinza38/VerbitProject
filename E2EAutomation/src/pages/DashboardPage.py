@@ -72,5 +72,5 @@ class DashboardPage:
         return self.page.locator(f"div > loading-context > div > {btn_name} > div > ul > li > div > div > a")
 
     def click_ms_vscode_btn(self):
-        self.left_panel.click_ms_vscode_btn()
+        self.left_panel.click_ms_vscode_btn_lp()
         return VSCodePage(self.page)

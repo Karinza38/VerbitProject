@@ -6,8 +6,16 @@ class IssueTabComponent:
     def __init__(self, page):
         self.page = page
         self._new_issue_btn = page.locator("//span[contains(text(), 'New issue')]")
-        self._search_box = page.locator("//*[@id='repository'']/div/div[1]/button")
+        self._search_box = page.locator("input[data-testid='filter-input']")
         self._issue_list = page.locator("ul[data-listview-component='items-list']")
+        self._close_issue_btn = page.locator("//span[contains(text(), 'Close issue')]")
+        self._close_btn_status = page.locator("//*/react-app/div/div/div/div/div[2]/div/div/div/div/span")
+
+    dict = {"open": "open", "closed": "closed"}
+
+    @property
+    def close_issue_btn_loc(self):
+        return self._close_btn_status
 
     def click_new_issue_btn(self):
         """
@@ -34,7 +42,7 @@ class IssueTabComponent:
         """
         return [issue.inner_text() for issue in self._issue_list.locator("a.Link--primary").all()]
 
-    def select_ul_element(self, ul_locator: str, text: str):
+    def select_ul_element(self, target_text: str):
         """
         Selects a <li> element within a <ul> element by its visible text using Playwright.
 
@@ -49,29 +57,41 @@ class IssueTabComponent:
 
         try:
             # Log the action
-            logging.info(f"Selecting '{text}' - Select <ul>/<ol> element by text.")
+            logging.info(f"Selecting '{target_text}' - Select <ul>/<ol> element by text.")
 
             # Locate the <ul> or <ol> element
-            ul_element = self.page.locator("ul[data-listview-component='items-list']")
+            ul_element = self._issue_list
+            #ul_element = self.page.locator("ul[data-listview-component='items-list']")
 
             # Find all <li> elements inside the specified <ul>
             li_elements = ul_element.locator("li")
 
-            # Find the <li> element with the specified text
-            li_element_to_select = li_elements.locator(f"text='{text}'")
+            # Get the count of <li> elements
+            count = li_elements.count()
 
             # Check if the <li> with the text exists
-            if not li_element_to_select.count():
-                logging.info(f"No <li> element with text '{text}' found.")
-                raise ValueError(f"No <li> element with text '{text}' found.")
+            for i in range(count):
+                # Get the text content of each <li>
+                li_text = li_elements.nth(i).inner_text().strip()
 
-            # Click the <li> element
-            li_element_to_select.first.click()
-            logging.info(f"Clicked on <li> element with text '{text}'.")
+                # Check if the target text is in the <li> text
+                if target_text.lower() in li_text.lower():
+                    logging.info(f"Match found: {li_text}")
+
+                    # Click the matched element
+                    locator_string = "ul[data-listview-component='items-list'] li h3 span"
+                    self.page.locator(locator_string).click()
+                    return self
+
+            # Raise error if no match is found
+            raise ValueError(f"No <li> element found with text: '{target_text}'")
 
         except TimeoutError as e:
             logging.ERROR(f"Timeout error: {str(e)}")
             raise
-        except Exception as e:
-            logging.ERROR(f"Error: {str(e)}")
-            raise
+
+    def click_close_issue_btn(self):
+        """
+        Clicks the 'New issue' button.
+        """
+        self._close_issue_btn.click()

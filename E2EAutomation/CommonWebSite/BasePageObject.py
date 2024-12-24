@@ -27,11 +27,11 @@ class BasePageObject:
         self.validate_page_is_loaded(is_validate_page)
 
     @property
-    def PagePath(self):
+    def pagepath(self):
         raise NotImplementedError("PagePath must be implemented in the child class.")
 
     @property
-    def PageLoadMarker(self):
+    def page_load_marker(self):
         raise NotImplementedError("PageLoadMarker must be implemented in the child class.")
 
     def open(self):

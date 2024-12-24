@@ -2,9 +2,9 @@ import pytest
 import requests
 from venv import logger
 
-from api_tests import github_api_get_flow, github_api_post_flow, github_api_retrieve_flow, github_api_update_flow
-from global_veriables import GlobalVariables  # Import the GlobalVariables class
-from fixtures import new_issue_payload
+from api_tests_old import github_api_get_flow, github_api_post_flow, github_api_retrieve_flow, github_api_update_flow
+from global_veriables_old import GlobalVariables  # Import the GlobalVariables class
+from fixtures_old import new_issue_payload
 
 # Define the GitHub API endpoint for issues
 #ISSUES_ENDPOINT = f"{GlobalVariables.BASE_URL}/repos/{GlobalVariables.OWNER}/{GlobalVariables.REPO}/issues"

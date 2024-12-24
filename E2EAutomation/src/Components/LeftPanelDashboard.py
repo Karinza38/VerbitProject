@@ -16,9 +16,9 @@ class LeftPanelDashboard:
         """
         self.page = page
         # Locator for the Microsoft/vscode button
-        self._ms_vscode_btn = page.locator("body > div.logged-in.env-production.page-responsive.full-width > div.application-main > div > div > aside > div > div > loading-context > div > div.Details.js-repos-container.mt-5 > div > ul > li > div > div > a")
+        self._ms_vscode_btn = page.locator("loading-context > div > div.Details.js-repos-container.mt-5 > div > ul > li:nth-child(1) > div > a > img")
 
-    def click_ms_vscode_btn(self):
+    def click_ms_vscode_btn_lp(self):
         """
         Clicks the 'Microsoft/vscode' button in the left panel to navigate to the repository.
         """
