@@ -1,4 +1,4 @@
-# VerbitProject
+VerbitProject
 
 This repository contains tests for both API interactions and end-to-end (E2E) user interactions with the GitHub platform.
 
