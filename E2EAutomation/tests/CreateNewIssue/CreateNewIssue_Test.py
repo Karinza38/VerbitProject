@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect, sync_playwright
 from E2EAutomation.src.pages.LoginPage import LoginPage
 from E2EAutomation.src.pages.VSCodePage import VSCodePage, InnerTabs
+from GitHubAPIAutomation.utils.common_functions import get_issue, get_issue_number_by_title, verify_issue_state
 import logging
 
 #region used data for test
@@ -62,6 +63,7 @@ def test_create_new_issue_user(set_up_tear_down, user, pw, issue_tab, title, des
     #region close new issue
         # Search the new issue by title name
     vscode_page.issue_tab_component.search_issue(query)
+    issue_number = get_issue_number_by_title(title)
     vscode_page.issue_tab_component.select_ul_element(target_text)
     vscode_page.issue_tab_component.click_close_issue_btn()
     #endregion
@@ -70,8 +72,10 @@ def test_create_new_issue_user(set_up_tear_down, user, pw, issue_tab, title, des
     expect(vscode_page.issue_tab_component.close_issue_btn_loc).to_contain_text("Closed")
     #endregion
 
-
-
+    #region verify issue status from api
+    current_state = verify_issue_state(issue_number)
+    assert "closed" in current_state, f"Expected 'Closed' but got '{current_state}'"
+    #endregion
 
 
 

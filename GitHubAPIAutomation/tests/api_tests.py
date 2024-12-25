@@ -3,7 +3,7 @@ import pytest
 import logging
 
 from GitHubAPIAutomation.utils.common_functions import compare_title_and_body, create_issue, update_issue, \
-    verify_issue_state, get_issue, get_all_issue
+    verify_issue_state, get_issue
 from GitHubAPIAutomation.global_veriables.global_veriables import GlobalVariables, configure_logger
 from GitHubAPIAutomation.config.fixtures import new_issue_payload
 

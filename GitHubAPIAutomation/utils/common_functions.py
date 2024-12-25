@@ -46,7 +46,6 @@ def get_issue(issue_number):
             f"Failed to retrieve issue #{issue_number}. Status Code: {response.status_code}, Response: {response.text}")
         response.raise_for_status()
 
-
 def create_issue(title, body):
     """
     Create a new GitHub issue.
@@ -70,7 +69,6 @@ def create_issue(title, body):
             response.raise_for_status()
     except Exception as e:
         logging.error(f"Failed to create issue: {e}")
-
 
 def update_issue(issue_number, state="closed"):
     """
@@ -98,7 +96,6 @@ def update_issue(issue_number, state="closed"):
     except Exception as e:
         logging.error(f"Failed to update issue: {e}")
 
-
 def verify_issue_state(issue_number):
     """
     Verify the state of a GitHub issue.
@@ -122,4 +119,26 @@ def verify_issue_state(issue_number):
             response.raise_for_status()
     except Exception as e:
         logging.error(f"Failed to fetch issue: {e}")
+
+def get_issue_number_by_title(title):
+    """
+    Fetches the issue number by matching the given title.
+    """
+    try:
+        # Send GET request to fetch issues
+        response = requests.get(GlobalVariables.ISSUES_ENDPOINT, headers=GlobalVariables.HEADERS)
+        response.raise_for_status()
+
+        # Search for the issue by title
+        issues = response.json()
+        for issue in issues:
+            if issue['title'].strip().lower() == title.strip().lower():
+                # if found, return the issue number
+                return issue['number']
+        # None returned in case for no match
+        return None
+
+    except Exception as e:
+        logging.error(f"Failed to fetch issues: {e}")
+        return None
 
