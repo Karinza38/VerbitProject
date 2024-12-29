@@ -2,6 +2,8 @@ from venv import logger
 import requests
 import logging
 from GitHubAPIAutomation.global_veriables.global_veriables import GlobalVariables, configure_logger
+from GitHubAPIAutomation.utils.request.common_request import CommonRequest
+
 
 def compare_title_and_body(actual_issue, expected_title, expected_body):
     """
@@ -141,4 +143,10 @@ def get_issue_number_by_title(title):
     except Exception as e:
         logging.error(f"Failed to fetch issues: {e}")
         return None
+
+# Class Method to Create a GitHub Issue**
+def create_github_issue(request_data: CommonRequest):
+    # Send POST request to GitHub
+    response = requests.post(GlobalVariables.ISSUES_ENDPOINT, headers=GlobalVariables.HEADERS, json=request_data.request_to_dict())
+    return response
 

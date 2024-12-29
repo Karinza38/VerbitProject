@@ -21,7 +21,6 @@ import logging
     ]
 )
 #endregion
-
 def test_create_new_issue_user(set_up_tear_down, user, pw, issue_tab, title, description, query, target_text) -> None:
     """
         Steps:

@@ -2,8 +2,7 @@ import requests
 import pytest
 import logging
 
-from GitHubAPIAutomation.utils.common_functions import compare_title_and_body, create_issue, update_issue, \
-    verify_issue_state, get_issue
+from GitHubAPIAutomation.utils.common_functions import compare_title_and_body, create_issue, update_issue, verify_issue_state, get_issue
 from GitHubAPIAutomation.global_veriables.global_veriables import GlobalVariables, configure_logger
 from GitHubAPIAutomation.config.fixtures import new_issue_payload
 
@@ -129,4 +128,5 @@ def test_create_issue_invalid_url(new_issue_payload, url, expected_status_code):
     response = requests.post(url, headers=GlobalVariables.HEADERS, json=new_issue_payload)
     logging.info(f"Expected status code {expected_status_code}, got {response.status_code}")
     assert response.status_code == expected_status_code, (f"Expected status code {expected_status_code}, got {response.status_code}")
+
 

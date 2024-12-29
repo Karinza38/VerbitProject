@@ -32,13 +32,15 @@ def set_up_tear_down(page):
 
 @pytest.fixture()
 def login_user(set_up_tear_down):
+    # Initialize the page object
     page = set_up_tear_down
     login_p = LoginPage(page)
 
     def do_login(credentials):
         """
-        Perform login and return the dashboard page object.
+        Perform login and return an instance of the DashboardPage object after successful login.
         """
         dashboard_p = login_p.do_login(credentials)
         return dashboard_p
+    # Returns: function: A callable function (`do_login`) that accepts credentials as input and performs login, returning the dashboard page object.
     return do_login
