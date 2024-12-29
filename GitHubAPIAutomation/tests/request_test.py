@@ -125,16 +125,4 @@ def test_crete_issue_without_title(title, body, assignee, assignees, expected_st
     #endregion
 
 
-def test():
-    sampledict = {
-        "name": "Kelly",
-        "age": 25,
-        "salary": 8000,
-        "city": "New york"}
-
-    keys = ["name", "salary"]
-
-    newdict = {k: sampledict[k] for k in keys}
-    print(newdict)
-
 

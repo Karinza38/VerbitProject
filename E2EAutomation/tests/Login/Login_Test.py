@@ -105,3 +105,4 @@ def test_login_with_no_user(set_up_tear_down) -> None:
 
     # Verify the dashboard header is NOT visible
     expect(dashboard_p.product_header).not_to_be_visible()
+

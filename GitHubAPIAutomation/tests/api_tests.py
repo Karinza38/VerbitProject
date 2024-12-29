@@ -130,3 +130,4 @@ def test_create_issue_invalid_url(new_issue_payload, url, expected_status_code):
     assert response.status_code == expected_status_code, (f"Expected status code {expected_status_code}, got {response.status_code}")
 
 
+

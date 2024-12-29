@@ -150,3 +150,4 @@ def create_github_issue(request_data: CommonRequest):
     response = requests.post(GlobalVariables.ISSUES_ENDPOINT, headers=GlobalVariables.HEADERS, json=request_data.request_to_dict())
     return response
 
+

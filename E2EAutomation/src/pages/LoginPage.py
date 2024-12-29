@@ -99,3 +99,4 @@ class LoginPage:
         """
         return self._sign_out_confirmation
 
+
