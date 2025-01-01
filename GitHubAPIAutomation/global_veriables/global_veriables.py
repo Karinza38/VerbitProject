@@ -5,7 +5,7 @@ class GlobalVariables:
     OWNER = "microsoft"
     REPO = "vscode"
     HEADERS = {
-    "Authorization": f"Bearer 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",
+    "Authorization": f"Bearer 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",
     "Accept": "application/vnd.github.v3+json"
     }
     ISSUES_ENDPOINT = f"{BASE_URL}/repos/{OWNER}/{REPO}/issues"
